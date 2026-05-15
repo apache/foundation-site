@@ -1,20 +1,33 @@
 pelican:
-  notify:         site-cvs@apache.org
-  autobuild:      true
-  target:         asf-site
-  
+  notify: site-cvs@apache.org
+  autobuild: true
+  target: asf-site
+
 staging:
   whoami: asf-site
 
 github:
   description: ASF Foundation Website
-  homepage:    https://www.apache.org/
+  homepage: https://www.apache.org/
   labels:
     - website
     - pelican
 
+  rulesets:
+    - name: "Default Branch Protection"
+      type: branch
+      branches:
+        includes:
+          - "~DEFAULT_BRANCH"
+          - "release/*"
+          - "rel/*"
+        excludes: []
+      bypass_teams:
+        - root
+      restrict_deletion: true
+      restrict_force_push: true
 notifications:
-  commits:      site-cvs@apache.org
-  issues:       centralservices@apache.org
+  commits: site-cvs@apache.org
+  issues: centralservices@apache.org
   pullrequests: centralservices@apache.org
 
